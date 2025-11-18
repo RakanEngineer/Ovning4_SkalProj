@@ -72,12 +72,42 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            List<string> theList = new List<string>();
 
-            //switch(nav){...}
+            while (true)
+            {
+                Console.WriteLine("Please input +item to add an item or -item to remove an item. Input 0 to exit to main menue: ");
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                if (input == "0")
+                    break;
+                
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        Console.WriteLine($"Added {value} to the list.");
+                        break;
+                    case '-':
+                        theList.Remove(value);
+                        Console.WriteLine($"Removed {value} from the list.");
+                        break;
+                    default:
+                        Console.WriteLine("Please use only + or - ");
+                        break;
+                }
+                Console.WriteLine($"Count: {theList.Count}, Capacity: {theList.Capacity}");
+                Console.WriteLine("---------------------------------------");
+
+                // Frågor:
+                // 2. När ökar listans kapacitet? - Kapaciteten ökar när antalet överstiger den aktuella kapaciteten.
+                // 3. Med hur mycket ökar kapaciteten? - Oftast dubblas (t.ex. 4 → 8 → 16 → 32).
+                // 4. Varför ökar inte kapaciteten i samma takt som element läggs till? - För att undvika omallokering varje gång
+                // 5. Minskar kapaciteten när element tas bort?  - Nej
+                // 6. När är array bättre än lista? - När storleken är känd i förväg och ska vara fast.
+            }
         }
 
         /// <summary>
