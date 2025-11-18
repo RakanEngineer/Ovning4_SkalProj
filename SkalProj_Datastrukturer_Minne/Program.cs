@@ -83,7 +83,7 @@ namespace SkalProj_Datastrukturer_Minne
 
                 if (input == "0")
                     break;
-                
+
                 switch (nav)
                 {
                     case '+':
@@ -120,6 +120,52 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            Queue<string> theQueue = new Queue<string>();
+
+            while (true)
+            {
+                Console.WriteLine("\n Queue Menu:");
+                Console.WriteLine("1 = Add person to queue (Enqueue)");
+                Console.WriteLine("2 = Remove first person from queue (Dequeue)");
+                Console.WriteLine("0 = Exit to menu");
+                Console.Write("Please input 1 to enqueue an item or 2 to dequeue an item. Input 0 to exit to main menue: ");
+
+                string input = Console.ReadLine();
+                if (input == "0")
+                    break;
+
+                switch (input)
+                {
+
+                    case "1":
+                        Console.Write("Enter name to add: ");
+                        string name = Console.ReadLine();
+                        theQueue.Enqueue(name);
+                        Console.WriteLine($"{name} has entered the queue.");
+                        break;
+
+                    case "2":
+                        if (theQueue.Count > 0)
+                        {
+                            string removed = theQueue.Dequeue();
+                            Console.WriteLine($"{removed} has been served and left the queue.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The queue is empty.");
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid input. Use 1, 2 or 0.");
+                        break;
+                }
+                Console.WriteLine("n Current  queue: ");
+                foreach (var person in theQueue)
+                {
+                    Console.Write(person + " ");
+                }
+            }
         }
 
         /// <summary>
