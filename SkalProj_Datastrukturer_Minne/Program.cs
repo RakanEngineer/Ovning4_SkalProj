@@ -173,11 +173,80 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
-            /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
+            Stack<string> theStack = new Stack<string>();
+
+            while (true)
+            {
+                Console.WriteLine("\n Stack Menu:");
+                Console.WriteLine("1 = Push item onto stack");
+                Console.WriteLine("2 = Pop item from stack");
+                Console.WriteLine("3 = Reverse a text");
+                Console.WriteLine("0 = Exit to menu");
+                Console.Write("Please input 1 to push an item or 2 to pop an item. Input 0 to exit to main menue: ");
+
+                string input = Console.ReadLine();
+                if (input == "0")
+                    break;
+
+                switch (input)
+                {
+                    case "1":
+                        Console.Write("Enter item to push onto stack: ");
+                        string itemToPush = Console.ReadLine();
+                        theStack.Push(itemToPush);
+                        Console.WriteLine($"{itemToPush} has been pushed onto the stack.");
+                        PrintStack(theStack);
+                        break;
+                    case "2":
+                        if (theStack.Count > 0)
+                        {
+                            string poppedItem = theStack.Pop();
+                            Console.WriteLine($"{poppedItem} has been popped from the stack.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The stack is empty.");
+                        }
+                        PrintStack(theStack);
+                        break;
+                        case "3":
+                        ReverseText() ; 
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input. Use 1, 2 or 0.");
+                        break;
+                }
+                
+            }
+                /*
+                 * Loop this method until the user inputs something to exit to main menue.
+                 * Create a switch with cases to push or pop items
+                 * Make sure to look at the stack after pushing and and poping to see how it behaves
+                */
+            }
+
+        private static void ReverseText()
+        {
+            Console.WriteLine("Enter text to reverse: ");
+            string text = Console.ReadLine();
+            Stack<char> stack = new Stack<char>(); 
+            foreach (var c in text)
+            {
+                stack.Push(c);
+            }
+            string reversed = "";
+            while (stack.Count > 0) 
+            { 
+                reversed += stack.Pop(); 
+            }
+            Console.WriteLine("Reversed text: " + reversed);
+        }
+
+        private static void PrintStack(Stack<string> stack)
+        {
+            Console.WriteLine("Current stack content:");
+            foreach (var item in stack)
+                Console.Write(item + " ");
         }
 
         static void CheckParanthesis()
