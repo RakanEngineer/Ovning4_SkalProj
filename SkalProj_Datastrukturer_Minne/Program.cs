@@ -251,14 +251,43 @@ namespace SkalProj_Datastrukturer_Minne
 
         static void CheckParanthesis()
         {
+            Console.WriteLine("Enter text to check parentheses: ");
+            string input = Console.ReadLine();
+            Stack<char> stack = new Stack<char>();
+
+            foreach(char c in input)
+            {
+                if (c == '(' || c == '{' || c == '[')
+                    stack.Push(c);
+                else if (c == ')' || c == '}' || c == ']')
+                {
+                    if (stack.Count == 0)
+                    {
+                        Console.WriteLine("Incorrect");
+                        Console.WriteLine("---------------------------------------");
+                        return;
+                    }
+
+                    char last = stack.Pop();
+                    if ((c == ')' && last != '(') ||
+                                    (c == '}' && last != '{') ||
+                                    (c == ']' && last != '['))
+                    {
+                        Console.WriteLine("Incorrect");
+                        Console.WriteLine("---------------------------------------");
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine(stack.Count == 0 ? "Correct" : "Incorrect");
+            Console.WriteLine("---------------------------------------");
             /*
              * Use this method to check if the paranthesis in a string is Correct or incorrect.
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-        }
-
+        }       
     }
 }
 
