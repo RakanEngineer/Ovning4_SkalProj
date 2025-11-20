@@ -19,6 +19,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
                     + "\n5. Recursive functions"
+                    + "\n6. Iterative functions"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -46,7 +47,10 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case '5':
                         RecursiveMenu();
-                        break;                    
+                        break;
+                    case '6':
+                        IterativeMenu();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -59,7 +63,7 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                 }
             }
-        }              
+        }
 
         /// <summary>
         /// Examines the datastructure List
@@ -334,6 +338,50 @@ namespace SkalProj_Datastrukturer_Minne
 
             return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
+
+        private static void IterativeMenu()
+        {
+            Console.WriteLine("Enter a number for iterative even or fibonacci:");
+            int n = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"IterativeEven({n}) = {IterativeEven(n)}");
+            Console.WriteLine($"IterativeFibonacci({n}) = {IterativeFibonacci(n)}");
+        }
+
+
+        private static int IterativeEven(int n)
+        {
+            int value = 2;
+            for (int i = 1; i < n; i++)
+            {
+                value += 2;
+            }
+            return value;
+        }
+        private static int IterativeFibonacci(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            int a = 0;
+            int b = 1;
+            int result = 0;
+
+            for (int i = 2; i <= n; i++)
+            {
+                result = a + b;
+                a = b;
+                b = result;
+            }
+
+            return result;
+        }
+
+        //Fråga:
+        //Utgå ifrån era nyvunna kunskaper om iteration, rekursion och minneshantering.Vilken av ovanstående funktioner är mest minnesvänlig och varför?
+        // Den iterativa funktionen är mest minnesvänlig eftersom den använder en konstant mängd minne oavsett hur stort n är.
+        // Rekursion däremot skapar ett nytt stack frame vid varje anrop, vilket gör att minnesanvändningen ökar för varje nivå och kan leda till stack overflow.    }
     }
 }
+
 
