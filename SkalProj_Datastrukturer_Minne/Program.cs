@@ -18,6 +18,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
+                    + "\n5. Recursive functions"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -43,6 +44,9 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        RecursiveMenu();
+                        break;                    
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -55,7 +59,7 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                 }
             }
-        }
+        }              
 
         /// <summary>
         /// Examines the datastructure List
@@ -209,35 +213,35 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         PrintStack(theStack);
                         break;
-                        case "3":
-                        ReverseText() ; 
+                    case "3":
+                        ReverseText();
                         break;
                     default:
                         Console.WriteLine("Invalid input. Use 1, 2 or 0.");
                         break;
                 }
-                
+
             }
-                /*
-                 * Loop this method until the user inputs something to exit to main menue.
-                 * Create a switch with cases to push or pop items
-                 * Make sure to look at the stack after pushing and and poping to see how it behaves
-                */
-            }
+            /*
+             * Loop this method until the user inputs something to exit to main menue.
+             * Create a switch with cases to push or pop items
+             * Make sure to look at the stack after pushing and and poping to see how it behaves
+            */
+        }
 
         private static void ReverseText()
         {
             Console.WriteLine("Enter text to reverse: ");
             string text = Console.ReadLine();
-            Stack<char> stack = new Stack<char>(); 
+            Stack<char> stack = new Stack<char>();
             foreach (var c in text)
             {
                 stack.Push(c);
             }
             string reversed = "";
-            while (stack.Count > 0) 
-            { 
-                reversed += stack.Pop(); 
+            while (stack.Count > 0)
+            {
+                reversed += stack.Pop();
             }
             Console.WriteLine("Reversed text: " + reversed);
         }
@@ -255,7 +259,7 @@ namespace SkalProj_Datastrukturer_Minne
             string input = Console.ReadLine();
             Stack<char> stack = new Stack<char>();
 
-            foreach(char c in input)
+            foreach (char c in input)
             {
                 if (c == '(' || c == '{' || c == '[')
                     stack.Push(c);
@@ -286,8 +290,50 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+            //Fråga: Vilken datastruktur använder du?
+            // Jag använder en Stack<char> för att kontrollera om en sträng är välformad.
+            // Anledningen är att en stack följer FILO - principen(First In Last Out),
+            // vilket gör den perfekt för att hantera parenteser som måste stängas
+            // i omvänd ordning mot hur de öppnades. När vi ser en parentes som öppnas
+            // pushas den på stacken, och när vi ser en stängande parentes poppar vi
+            // och kontrollerar att den matchar.
+        }
+        static void RecursiveMenu()
+        {
+            //Implement the recursive functions here.
+            //RecursiveOdd(1)
+            //→ n = 1 → return 1
+            //RecursiveOdd(3)
+            //→ RecursiveOdd(2) + 2
+            //→ RecursiveOdd(1) + 2 + 2
+            //→ 1 + 4 = 5
+            //RecursiveOdd(5)
+            //→ RecursiveOdd(4) + 2
+            //→ RecursiveOdd(3) + 2 + 2
+            //→ RecursiveOdd(2) + 2 + 2 + 2
+            //→ RecursiveOdd(1) + 2 + 2 + 2 + 2
+            //→ 1 + 8 = 9
 
-        }       
+            Console.WriteLine("Enter a number for recursive even or fibonacci:");
+            int n = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"RecursiveEven({n}) = {RecursiveEven(n)}");
+            Console.WriteLine($"Fibonacci({n}) = {Fibonacci(n)}");
+        }        
+        private static int RecursiveEven(int n)
+        {
+            if (n == 1)
+                return 2;
+
+            return RecursiveEven(n - 1) + 2;
+        }
+        private static int Fibonacci(int n)
+        {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
+        }
     }
 }
 
